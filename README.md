@@ -9,6 +9,9 @@ Once the program has began running, it will as questions regrading your classes 
 After this information is entered, the program will begin creating the folders, and the system will notify you of every folder made.
 The new folder will be named "Texas State University" and will be located in the Documents directory in File Explorer.
 
+![alt text](https://github.com/theo254/New-Semester-Template/blob/main/Post-Script-Map.PNG)
+
+
 ### Disclaimer
 Only run this script once to avoid duplication.
 During the creation process, no files or folders will be deleted, only added. This will prevent any possible data loss.
