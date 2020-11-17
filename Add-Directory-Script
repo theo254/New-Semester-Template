@@ -1,0 +1,58 @@
+<#
+----------
+Error Skip
+Set Semester and Year
+Set Initial Path
+New Item in Documents
+	Adds Texas State University Folder
+	Adds Classes Folder
+	Adds Year and Semester Folder
+Adds Classes
+	Ask for Class Name
+	Add Classes Folder
+	Adds Folders that would be asked for
+Made by Theodore Oatman
+----------
+#>
+
+#In case the directory has already been made, ignore error
+$ErrorActionPreference = 'SilentlyContinue'
+
+<#Assigns the name of the folder based on year and semester.
+Could not use case statement due to comparisons made#>
+If ((Get-Date).Month -le 5)
+    {
+    $semester= "Spring " + (Get-Date).ToString("yyyy")
+    }
+ElseIf ((Get-Date).Month -gt 5 -AND (Get-Date).Month -lt 8)
+    {
+    $semester= "Summer " + (Get-Date).ToString("yyyy")
+    }   
+ElseIf ((Get-Date).Month -ge 8) 
+    {
+    $semester= "Fall " + (Get-Date).ToString("yyyy")
+    }
+
+<#Creates an integer to find the number of classes being taken. This will be used in 
+creation for an array #>
+[uint16]$arrayCounter = Read-Host 'How Many Classes Are you Taking?'
+
+#Array is created to hold the names of classes
+$classArr = [Object[]]::new($arrayCounter+1)
+For ($i=1;$i -lt $classArr.Length;$i++)
+{
+    $classArr[$i]= Read-Host ("Enter the name of class " + $i)
+}
+
+#Folders for all classes entered earlier are being created
+For ($i=0;$i -lt $classArr.Length;$i++)
+{
+    New-Item -ItemType Directory -Path $Home\Documents\"Texas State University"\Classes\"$semester" -Name $classArr[$i]
+}
+
+#All subfolders for classes are being inserted
+cd $Home\Documents\"Texas State University"\Classes\"$semester"
+
+New-Item -ItemType Directory -Path * -Name "Class Resources and Lecture Slides"
+New-Item -ItemType Directory -Path * -Name "Assignments and Projects"
+New-Item -ItemType Directory -Path * -Name "Syllabus"
